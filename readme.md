@@ -16,7 +16,13 @@ tar -xvf ...tar.gz
 
 ## Getting shell
 ```
-PS1="(guix) $PS1" bash --rcfile ./etc/profile
+PS1="(guix) $PS1" ./bin/bash --rcfile ./etc/profile
+```
+
+## Building
+
+```
+cmake -B build -DGYSELALIBXX_DEPENDENCY_POLICIES=INSTALLED
 ```
 
 ## Lock channels
