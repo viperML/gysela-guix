@@ -4,4 +4,4 @@
       (specification->package "gyselalibxx"))
     (specifications->manifest
       (list
-        "hello"))))
+        "bash"))))
