@@ -14,13 +14,12 @@ jobs:
     name: "Publish to github releases"
     runs-on: ubuntu-latest
     steps:
-      - name: Guix cache
+      - name: Guix eval cache
         uses: actions/cache@v3
         with:
           path: ~/.cache/guix
-          key: guix-cache-${{ github.sha }}
-          restore-keys: |
-            guix-cache-
+          key: cache-guix
+          restore-keys: cache-guix
 
       - name: Install Guix
         uses: PromyLOPh/guix-install-action@v1
@@ -31,7 +30,7 @@ jobs:
       - name: Build pack
         run: |
           guix time-machine -C ./channels.locked.scm -q -- \
-               pack --format=tarball -r pack.tar.gz -R -S /bin=bin -S /etc=etc hello
+               pack --format=tarball -r pack.tar.gz -R -S /bin=bin -S /etc=etc -m manifest.scm
           mkdir -p release
           cp -vL pack.tar.gz release/pack.tar.gz
 
