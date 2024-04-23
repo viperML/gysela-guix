@@ -1,7 +1,13 @@
 name: publish
 
 on:
-  - push
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+
+permissions:
+  contents: write
 
 jobs:
   main:
