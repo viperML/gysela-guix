@@ -1,0 +1,39 @@
+name: publish
+
+on:
+  - push
+
+jobs:
+  main:
+    name: "Publish to github releases"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guix cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/guix
+          key: guix-cache-${{ github.sha }}
+          restore-keys: |
+            guix-cache-
+
+      - name: Install Guix
+        uses: PromyLOPh/guix-install-action@v1
+
+      - name: Build pack
+        run: |
+          guix time-machine -C ./channels.locked.scm -q -- \
+               pack --format=tarball -r pack.tar.gz -R -S /bin=bin -S /etc=etc hello
+          mkdir -p release
+          cp -vL pack.tar.gz release/pack.tar.gz
+
+      - uses: ncipollo/release-action@v1
+        name: Release
+        with:
+          tag: latest
+          makeLatest: true
+          omitBody: true
+          omitName: true
+          allowUpdates: true
+          replacesArtifacts: true
+          artifacts: "release/pack.tar.gz"
+

@@ -29,9 +29,7 @@ dependencies, and some other things.
 
 ```
 $ guix time-machine -C ./channels.locked.scm -q -- \
-       pack --format=tarball -R -S /bin=bin -S /etc=etc -m ./manifest.scm
-....
-/gnu/store/....tar.gz
+       pack --format=tarball -r pack.tar.gz -R -S /bin=bin -S /etc=etc -m ./manifest.scm
 ```
 
 ## Copy pack and unpack
@@ -41,7 +39,7 @@ You can send the tarball to the host by any means, for example with scp.
 It is important to unpack the tarball in a FS with **high limit of inodes**.
 
 ```
-$ scp /gnu/store/....tar.gz $HOST:$WORK
+$ scp pack.tar.gz $HOST:$WORK
 $ ssh $HOST
 (jean-zay) $ cd $WORK
 (jean-zay) $ tar -xvf ...tar.gz
