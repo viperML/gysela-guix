@@ -19,6 +19,9 @@ jobs:
       - name: Install Guix
         uses: PromyLOPh/guix-install-action@v1
 
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Build pack
         run: |
           guix time-machine -C ./channels.locked.scm -q -- \
