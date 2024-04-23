@@ -14,13 +14,6 @@ jobs:
     name: "Publish to github releases"
     runs-on: ubuntu-latest
     steps:
-      - name: Guix eval cache
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/guix
-          key: cache-guix
-          restore-keys: cache-guix
-
       - name: Install Guix
         uses: PromyLOPh/guix-install-action@v1
 
