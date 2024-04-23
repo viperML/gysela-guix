@@ -56,7 +56,10 @@ To enter the shell where all the dependencies are available, run the following c
 ## Building
 
 ```
-(jean-zay) $ cmake -B build -DGYSELALIBXX_DEPENDENCY_POLICIES=INSTALLED
+(jean-zay) $ cmake \
+               -B build \
+               -DGYSELALIBXX_DEPENDENCY_POLICIES=INSTALLED \
+               -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 ....
 ```
 
